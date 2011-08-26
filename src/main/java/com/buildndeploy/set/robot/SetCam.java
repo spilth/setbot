@@ -30,4 +30,8 @@ public class SetCam {
 	public static Object getCodeCard(int code) {
 		return cards.get(getCodeCardNumber(code));
 	}
+
+	public static PhysicalCard getPhysicalCardFromTopCode(TopCode topCode) {
+		return new PhysicalCard(new Deck().getCards().get(0), 42, 42);
+	}
 }

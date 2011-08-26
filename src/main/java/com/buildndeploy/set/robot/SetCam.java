@@ -1,5 +1,6 @@
 package com.buildndeploy.set.robot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,15 +24,26 @@ public class SetCam {
 		}	
 	}
 	
-	public static int getCodeCardNumber(int code) {		
-		return codeToCardNumberMap.get(code);
+	public static int getCodeCardNumber(TopCode topCode) {		
+		return codeToCardNumberMap.get(topCode.getCode());
 	}
 
-	public static Object getCodeCard(int code) {
-		return cards.get(getCodeCardNumber(code));
+	public static Card getCodeCard(TopCode topCode) {
+		return cards.get(getCodeCardNumber(topCode));
 	}
 
 	public static PhysicalCard getPhysicalCardFromTopCode(TopCode topCode) {
-		return new PhysicalCard(new Deck().getCards().get(0), 42, 42);
+		return new PhysicalCard(getCodeCard(topCode), (int) topCode.getCenterX(), (int) topCode.getCenterY());
+	}
+
+	public static List<PhysicalCard> getPhysicalCardsFromTopCodes(List<TopCode> topCodes) {
+		List<PhysicalCard> physicalCards = new ArrayList<PhysicalCard>();
+
+		for (TopCode topCode: topCodes) {
+			PhysicalCard physicalCard = getPhysicalCardFromTopCode(topCode);
+			physicalCards.add(physicalCard);
+		}
+		
+		return physicalCards;
 	}
 }

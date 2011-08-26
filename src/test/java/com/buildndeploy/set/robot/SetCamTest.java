@@ -19,6 +19,7 @@ public class SetCamTest {
 	PhysicalCard firstPhysicalCard, secondPhysicalCard, thirdPhysicalCard, lastPhysicalCard;
 	TopCode topCodeA, topCodeB;
 	List<TopCode> topCodes;
+	List<PhysicalCard> physicalCards;
 
 	@Before
 	public void setup() {
@@ -26,7 +27,7 @@ public class SetCamTest {
 
 		firstCard = cards.get(0);
 		secondCard = cards.get(1);
-		secondCard = cards.get(2);
+		thirdCard = cards.get(2);
 		lastCard = cards.get(80);
 
 		firstPhysicalCard = new PhysicalCard(firstCard, 42, 42);
@@ -35,30 +36,40 @@ public class SetCamTest {
 		topCodeA = new TopCode(31);
 		topCodeA.setLocation(42.0f, 42.0f);
 
-		topCodeB = new TopCode(31);
+		topCodeB = new TopCode(47);
 		topCodeB.setLocation(64.0f, 64.0f);
 
 		topCodes = new ArrayList<TopCode>();
 		topCodes.add(topCodeA);
 		topCodes.add(topCodeB);
+		
+		physicalCards = new ArrayList<PhysicalCard>();
+		physicalCards.add(firstPhysicalCard);
+		physicalCards.add(secondPhysicalCard);
 	}
 	
 	@Test
 	public void codeMapsToCardNumber() {
-		assertEquals(0, SetCam.getCodeCardNumber(31));
-		assertEquals(1, SetCam.getCodeCardNumber(47));
+		assertEquals(0, SetCam.getCodeCardNumber(topCodeA));
+		assertEquals(1, SetCam.getCodeCardNumber(topCodeB));
 	}
 
 	@Test
 	public void codeMapsToCard() {
-		assertEquals(firstCard, SetCam.getCodeCard(31));
+		assertEquals(firstCard, SetCam.getCodeCard(topCodeA));
+		assertEquals(secondCard, SetCam.getCodeCard(topCodeB));
 	}
 
 	@Test
 	public void physicalCardFromTopCode() {
-		PhysicalCard physicalCard = new PhysicalCard(firstCard, 42, 42);
+		assertEquals(firstPhysicalCard, SetCam.getPhysicalCardFromTopCode(topCodeA));
+		assertEquals(secondPhysicalCard, SetCam.getPhysicalCardFromTopCode(topCodeB));
+	}
 
-		assertEquals(physicalCard, SetCam.getPhysicalCardFromTopCode(topCodeA));
+	@Test
+	public void physicalCardsFromListOfTopCodes() {
+		List<PhysicalCard> list = SetCam.getPhysicalCardsFromTopCodes(topCodes);
+		assertArrayEquals(physicalCards.toArray(), list.toArray());
 	}
 
 }

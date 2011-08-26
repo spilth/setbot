@@ -43,6 +43,11 @@
 			<artifactId>topcodes</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.buildndeploy</groupId>
+			<artifactId>setlib</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -38,6 +38,11 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+		<dependency>
+			<groupId>topcodes</groupId>
+			<artifactId>topcodes</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
